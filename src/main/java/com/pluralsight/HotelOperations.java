@@ -8,5 +8,11 @@ public class HotelOperations {
         System.out.println("Housekeeping is cleaning room 1...");
         room1.setDirty(false);
         System.out.println("Room availability: " + room1.isAvailable());
+
+        Reservation reservation1 = new Reservation("King",
+                0, 3, true, 0);
+
+        System.out.printf("Your total is: $%.2f%n", reservation1.getReservationTotal());
+        System.out.println(reservation1.toString());
     }
 }

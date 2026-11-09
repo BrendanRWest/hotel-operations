@@ -24,6 +24,13 @@ public class Reservation {
     }
 
     public double getPrice() {
+        if (getRoomType().equalsIgnoreCase("King")){
+            setPrice(139.00);
+        }
+        if (getRoomType().equalsIgnoreCase("Double")){
+            setPrice(124.00);
+        }
+
         return price;
     }
 
@@ -48,16 +55,16 @@ public class Reservation {
     }
 
     public double getReservationTotal() {
-        if (this.getRoomType().equalsIgnoreCase("King")){
-            this.setPrice(139.00);
+        if (getRoomType().equalsIgnoreCase("King")){
+            setPrice(139.00);
         }
-        if (this.getRoomType().equalsIgnoreCase("double")){
-            this.setPrice(124.00);
+        if (getRoomType().equalsIgnoreCase("Double")){
+            setPrice(124.00);
         }
         if(isWeekend()){
-            this.setPrice((this.getPrice()) * .10 + this.getPrice());
+            setPrice((getPrice()) * .10 + getPrice());
         }
-        this.reservationTotal = this.getPrice() * this.getNumberOfNights();
+        this.reservationTotal = getPrice() * getNumberOfNights();
         return reservationTotal;
     }
 

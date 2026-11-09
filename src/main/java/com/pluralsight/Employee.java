@@ -79,6 +79,20 @@ public class Employee {
     public double getTotalPay() {
         return (getRegularHours() * getPayRate()) + (getOvertimeHours() * 1.5 * getPayRate());
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId='" + employeeId + '\'' +
+                ", name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                ", payRate=" + payRate +
+                ", hoursWorked=" + hoursWorked +
+                ", overtimeHours=" + overtimeHours +
+                ", regularHours=" + regularHours +
+                ", overtimePay=" + overtimePay +
+                '}';
+    }
 }
 
 

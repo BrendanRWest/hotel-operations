@@ -71,4 +71,15 @@ public class Reservation {
     public void setReservationTotal(double reservationTotal) {
         this.reservationTotal = reservationTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "roomType='" + roomType + '\'' +
+                ", price=" + price +
+                ", numberOfNights=" + numberOfNights +
+                ", weekend=" + weekend +
+                ", reservationTotal=" + reservationTotal +
+                '}';
+    }
 }

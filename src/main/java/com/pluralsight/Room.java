@@ -1,73 +1,62 @@
 package com.pluralsight;
 
+/**
+ * Room (Workbook 4a, Section 2-1 Creating Classes, Exercise 1)
+ *
+ * Knows everything about one hotel room: how many beds, the price,
+ * and whether it is occupied or dirty.
+ *
+ * A room is only available if it is clean AND not occupied, so
+ * isAvailable() is a derived getter: it has no backing variable
+ * and works the answer out from the two booleans.
+ */
 public class Room {
+    // Backing variables: private so only this class can change them
     private int numberOfBeds;
     private double price;
-    private boolean occupied;
-    private boolean dirty;
-    private boolean available;
+    private boolean isOccupied;
+    private boolean isDirty;
 
-    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty, boolean available) {
+    // A new room starts empty and clean
+    public Room(int numberOfBeds, double price) {
         this.numberOfBeds = numberOfBeds;
         this.price = price;
-        this.occupied = occupied;
-        this.dirty = dirty;
-        this.available = available;
+        this.isOccupied = false;
+        this.isDirty = false;
     }
 
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
 
-    public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
-
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
+    // Boolean getters start with "is" instead of "get"
     public boolean isOccupied() {
-        return occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
+        return isOccupied;
     }
 
     public boolean isDirty() {
-        return dirty;
+        return isDirty;
     }
 
-    public void setDirty(boolean dirty) {
-        this.dirty = dirty;
-    }
-
+    // Derived getter: no variable called "available", the answer is calculated
     public boolean isAvailable() {
-        if(!isDirty() && !isOccupied()){
-            available = true;
-        } else {
-            available = false;
-        }
-        return available;
+        return !isOccupied && !isDirty;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void checkIn(){
+        isOccupied = true;
+        isDirty = true;
     }
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "numberOfBeds=" + numberOfBeds +
-                ", price=" + price +
-                ", occupied=" + occupied +
-                ", dirty=" + dirty +
-                ", available=" + available +
-                '}';
+    public void checkOut(){
+        isOccupied = false;
+    }
+
+    public void cleanRoom(){
+        isDirty = false;
     }
 }

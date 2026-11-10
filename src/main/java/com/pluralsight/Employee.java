@@ -1,16 +1,25 @@
 package com.pluralsight;
 
+/**
+ * Employee (Workbook 4a, Section 2-1 Creating Classes, Exercise 1)
+ *
+ * Stores payroll information about one employee: id, name, department,
+ * pay rate and hours worked.
+ *
+ * The three derived getters have no backing variable, they calculate
+ * from hoursWorked and payRate:
+ *   getRegularHours()  the first 40 hours
+ *   getOvertimeHours() anything above 40
+ *   getTotalPay()      regular at the pay rate, overtime at 1.5 x the rate
+ */
 public class Employee {
-    private String employeeId;
+    private int employeeId;
     private String name;
     private String department;
     private double payRate;
-    private int hoursWorked;
-    private int overtimeHours;
-    private int regularHours;
-    private double overtimePay;
+    private double hoursWorked;
 
-    public Employee(String employeeId, String name, String department, double payRate, int hoursWorked) {
+    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -18,81 +27,57 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public String getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDepartment() {
         return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     public double getPayRate() {
         return payRate;
     }
 
-    public void setPayRate(double payRate) {
-        this.payRate = payRate;
-    }
-
-    public int getHoursWorked() {
+    public double getHoursWorked() {
         return hoursWorked;
     }
 
-    public void setHoursWorked(int hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
-
-    public int getOvertimeHours(){
-        if((getHoursWorked()-40) > 0){
-            overtimeHours = getHoursWorked()-40;
-        } else{
-            overtimeHours = 0;
-        }
-        return overtimeHours;
-    }
-
-    public int getRegularHours(){
-        if((getHoursWorked()-40) > 0){
-            regularHours = 40;
-        } else {
-            regularHours = getHoursWorked();
-        }
-        return regularHours;
-    }
-
+    // Derived getter: up to 40 hours at the normal rate, the rest at time and a half
     public double getTotalPay() {
-        return (getRegularHours() * getPayRate()) + (getOvertimeHours() * 1.5 * getPayRate());
+        if (hoursWorked <= 40) {
+            return hoursWorked * payRate;
+        } else {
+            return (40 * payRate) + ((hoursWorked - 40) * (payRate * 1.5));
+        }
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId='" + employeeId + '\'' +
-                ", name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                ", payRate=" + payRate +
-                ", hoursWorked=" + hoursWorked +
-                ", overtimeHours=" + overtimeHours +
-                ", regularHours=" + regularHours +
-                ", overtimePay=" + overtimePay +
-                '}';
+    // Alternative kept switched off: the same total built from the two
+    // getters below, so the 40-hour rule lives in one place only
+/*    public double getTotalPay() {
+        return (getRegularHours() * payRate) + (getOvertimeHours() * payRate * 1.5);
+    }*/
+
+
+    // Derived getter: the hours paid at the normal rate (never more than 40)
+    public double getRegularHours() {
+        if (hoursWorked <= 40) {
+            return hoursWorked;
+        } else {
+            return 40;
+        }
+    }
+
+    // Derived getter: the hours above 40 (0 if there are none)
+    public double getOvertimeHours() {
+        if (hoursWorked > 40) {
+            return hoursWorked - 40;
+        } else {
+            return 0;
+        }
     }
 }
-
-

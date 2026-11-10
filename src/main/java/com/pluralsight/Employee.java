@@ -21,6 +21,8 @@ public class Employee {
     private double time;
     private double punchInTime;
     private double punchOutTime;
+    private double time1;
+    private double time2;
 
     public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
@@ -84,12 +86,16 @@ public class Employee {
         }
     }
 
-    public void punchIn(double time){
+    /*public void punchIn(double time){
         punchInTime = time;
-    }
+    }*/
 
-    public void punchOut(double time){
+    /*public void punchOut(double time){
         punchOutTime = time;
         hoursWorked += (time - punchInTime);
+    }*/
+
+    public void punchTimeCard (double time1, double time2){
+        hoursWorked += (time2 - time1);
     }
 }
